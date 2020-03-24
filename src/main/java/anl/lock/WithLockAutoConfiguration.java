@@ -36,11 +36,11 @@ public class WithLockAutoConfiguration {
     @Bean(name = "redisExecutor")
     public ThreadPoolTaskExecutor asyncServiceExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(7);
-        executor.setMaxPoolSize(20);
-        executor.setQueueCapacity(200);
+        executor.setCorePoolSize(20);
+        executor.setMaxPoolSize(40);
+        executor.setQueueCapacity(500);
         executor.setThreadNamePrefix("async-redis-service");
-        executor.setKeepAliveSeconds(10);
+        executor.setKeepAliveSeconds(5);
         // rejection-policy：当pool已经达到max size的时候，如何处理新任务
         // CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());

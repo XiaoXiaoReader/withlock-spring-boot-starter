@@ -77,7 +77,7 @@ public class RedisLock implements Lock {
 
         boolean flag = LOCK_SUCCESS.equals(String.valueOf(result));
         if (flag) {
-            //开启守护线程定期检测续锁
+            // TODO 开启守护线程定期检测续锁，这里使用线程池执行守护线程，并发大可能会阻塞执行不了，应该直接执行守护线程
             ExpandLockExpireTask expandLockExpireTask = new ExpandLockExpireTask(lockKey, this.lockValue, this.expireTime, this);
             Thread thread = new Thread(expandLockExpireTask);
             thread.setDaemon(true);
